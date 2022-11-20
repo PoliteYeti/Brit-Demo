@@ -2,13 +2,12 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from fastapi_crudrouter import SQLAlchemyCRUDRouter
 from mangum import Mangum
 
 from brit_demo.database import ItemModel, engine, get_db
 from brit_demo.schemas import Item, StoredItem, Summary
-
-from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(root_path=os.environ.get("ROOT_PATH"))
 
@@ -31,8 +30,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
-
 
 @app.get("/api/summary", tags=["Summary"], response_model=Summary)
 async def get_summary():
@@ -44,5 +41,7 @@ async def get_summary():
 
     return Summary(totalcost=totalcost)
 
+
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 handler = Mangum(app, lifespan="off")
