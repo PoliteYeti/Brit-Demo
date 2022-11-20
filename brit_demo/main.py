@@ -8,6 +8,8 @@ from mangum import Mangum
 from brit_demo.database import ItemModel, engine, get_db
 from brit_demo.schemas import Item, StoredItem, Summary
 
+from fastapi.staticfiles import StaticFiles
+
 app = FastAPI(root_path=os.environ.get("ROOT_PATH"))
 
 router = SQLAlchemyCRUDRouter(
@@ -28,6 +30,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 
 @app.get("/api/summary", tags=["Summary"], response_model=Summary)
