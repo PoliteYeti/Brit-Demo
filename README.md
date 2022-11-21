@@ -2,7 +2,7 @@
 
 Welcome to my interpretation of the task set.
 
-I've implemented th backed on AWS lambda using the FastAPI framework. The data is stored in a postgres DB hosted on AWS using the RDS service. Credentials are stored in an environment variable and should have been provided directly should you wish to view the structure. I have used CRUDRouter to make the implementation go a little faster as it's a good fit for this use case.
+I've implemented the backend on AWS lambda using the FastAPI framework. The data is stored in a Postgres DB hosted on AWS using the RDS service. Credentials are stored in an environment variable and should have been provided directly should you wish to view the structure of the DB. I have used CRUDRouter to make the implementation go a little faster as it's a good fit for this use case.
 
 The build is currently manually completed by executing the following commands in order:
 
